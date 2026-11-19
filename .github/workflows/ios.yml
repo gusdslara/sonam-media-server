@@ -1,0 +1,64 @@
+# Gera o cliente iOS sem assinatura (Sonam-unsigned.ipa) para sideload.
+# Execução manual: aba Actions > "iOS (ipa sem assinatura)" > Run workflow.
+name: iOS (ipa sem assinatura)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ipa:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+    defaults:
+      run:
+        working-directory: clients/ios
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Versão do Xcode
+        run: xcodebuild -version
+
+      - name: Instalar XcodeGen
+        run: brew install xcodegen
+
+      - name: Gerar Sonam.xcodeproj
+        run: xcodegen generate
+
+      - name: Compilar (Release, iphoneos, sem assinatura)
+        run: |
+          set -o pipefail
+          xcodebuild \
+            -project Sonam.xcodeproj \
+            -scheme Sonam \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Empacotar Payload/Sonam.app em .ipa
+        run: |
+          set -euo pipefail
+          APP="build/DerivedData/Build/Products/Release-iphoneos/Sonam.app"
+          test -d "$APP"
+          rm -rf build/ipa Sonam-unsigned.ipa
+          mkdir -p build/ipa/Payload
+          cp -R "$APP" build/ipa/Payload/
+          (cd build/ipa && zip -qry ../../Sonam-unsigned.ipa Payload)
+          ls -lh Sonam-unsigned.ipa
+
+      - name: Publicar artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sonam-unsigned-ipa
+          path: clients/ios/Sonam-unsigned.ipa
+          if-no-files-found: error

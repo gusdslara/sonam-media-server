@@ -1,0 +1,13 @@
+<component name="HomeScene" extends="Scene">
+  <script type="text/brightscript" uri="HomeScene.brs"/>
+  <children>
+    <Label id="brand" translation="[65,40]" width="1100" height="55" text="sonam.  /  Sua casa na TV"/>
+    <Label id="message" translation="[65,100]" width="1130" height="135" wrap="true"/>
+    <LabelList id="library" translation="[65,240]" itemSize="[1140,55]" numRows="7" visible="false"/>
+    <Poster id="photo" translation="[40,140]" width="1200" height="530" loadDisplayMode="scaleToFit" visible="false"/>
+    <Video id="video" width="1280" height="720" visible="false"/>
+    <Audio id="audio"/>
+    <Timer id="poll" duration="3" repeat="true"/>
+    <Label id="hint" translation="[65,682]" width="1120" height="30" text="OK: abrir  |  *: modo compativel / original  |  Voltar: fechar player ou trocar servidor"/>
+  </children>
+</component>

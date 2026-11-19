@@ -1,0 +1,6 @@
+# Gerado pelo XcodeGen a partir de project.yml
+Sonam.xcodeproj/
+DerivedData/
+build/
+*.ipa
+xcuserdata/

@@ -1,0 +1,7 @@
+node_modules
+dist
+data
+**/target
+.git
+src-tauri/gen
+artifacts

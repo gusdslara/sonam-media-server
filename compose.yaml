@@ -1,0 +1,19 @@
+services:
+  sonam:
+    build: .
+    ports:
+      - "8096:8096"
+    volumes:
+      - library:/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    # Intel/AMD Linux: uncomment and grant the render group to UID 10001.
+    # devices:
+    #   - /dev/dri:/dev/dri
+    # group_add:
+    #   - "109" # use the actual render group ID from your host
+volumes:
+  library:

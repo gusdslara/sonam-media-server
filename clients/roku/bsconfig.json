@@ -1,0 +1,7 @@
+{
+  "rootDir": ".",
+  "files": ["manifest", "source/**/*", "components/**/*"],
+  "outFile": "../../artifacts/sonam-roku.zip",
+  "createPackage": true,
+  "copyToStaging": true
+}

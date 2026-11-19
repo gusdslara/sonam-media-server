@@ -1,0 +1,22 @@
+[Unit]
+Description=Sonam personal media library
+After=network.target
+
+[Service]
+User=sonam
+Group=sonam
+ExecStart=/usr/local/bin/sonam-server
+Environment=SONAM_DATA=/var/lib/sonam
+Environment=SONAM_BIND=0.0.0.0:8096
+StateDirectory=sonam
+WorkingDirectory=/var/lib/sonam
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/sonam
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

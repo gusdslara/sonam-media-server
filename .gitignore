@@ -1,0 +1,12 @@
+node_modules/
+dist/
+target/
+data/
+*.log
+src-tauri/gen/
+
+artifacts/
+**/.gradle/
+**/build/
+**/local.properties
+clients/android/app/src/main/jniLibs/

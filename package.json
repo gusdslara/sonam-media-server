@@ -1,0 +1,35 @@
+{
+  "name": "sonam",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "server": "cargo run --manifest-path server/Cargo.toml",
+    "test": "cargo test --manifest-path server/Cargo.toml",
+    "tauri": "tauri",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build",
+    "roku:build": "bsc --project clients/roku/bsconfig.json",
+    "test:e2e": "python -X utf8 scripts/smoke.py"
+  },
+  "dependencies": {
+    "@lucide/svelte": "^1.72.0",
+    "qrcode": "^1.5.4",
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^6.0.0",
+    "@tauri-apps/cli": "^2.0.0",
+    "@types/qrcode": "^1.5.5",
+    "brighterscript": "^0.73.8",
+    "prettier": "^3.10.1",
+    "prettier-plugin-svelte": "^4.1.1",
+    "svelte-check": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^7.0.0"
+  },
+  "license": "AGPL-3.0-only"
+}
